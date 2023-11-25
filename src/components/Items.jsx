@@ -1,7 +1,7 @@
 
 import PropTypes from 'prop-types';
 
-import { Link, useLocation, Outlet } from 'react-router-dom';
+import { useLocation, Outlet, NavLink } from 'react-router-dom';
 
 const Items = ({ bodyParts }) => {
 
@@ -18,9 +18,11 @@ const Items = ({ bodyParts }) => {
 
     return (
         <>
-            <ul className="container_HeadBody" >
+            <ul className="container_subPages" >
                 {currentBodyParts.map((bodyPart) => (
-                    <li key={bodyPart.idNo}><Link to={`${bodyPart.name}`}>{`${bodyPart.name}`}</Link></li>
+                    <li key={bodyPart.idNo} >
+                        <NavLink to={`${bodyPart.name}`} className="subPages">{`${bodyPart.name}`}</NavLink>
+                    </li>
                 ))}
             </ul>
             <Outlet />

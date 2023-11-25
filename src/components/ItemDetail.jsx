@@ -2,6 +2,7 @@ import PropTypes from 'prop-types';
 
 import { useLocation } from 'react-router-dom';
 import Images from '../data/imageData';
+import React from 'react';
 
 const ItemDetail = ({ bodyParts, handleItemClick, handlePaintClick, paletteVisible, handleColorClick }) => {
 
@@ -11,37 +12,38 @@ const ItemDetail = ({ bodyParts, handleItemClick, handlePaintClick, paletteVisib
 
     return (
         <>
-            <ul >
+            <ul className='container-items'>
                 {currentBodyParts.map((currentBodyPart) => (
-                    <li key={currentBodyPart.idNo}>
+                    <React.Fragment key={currentBodyPart.idNo}>
                         {currentBodyPart.items.map((item, itemIndex) => (
-                    <div key={item.itemId} onClick={() => handleItemClick(currentBodyPart.idNo, itemIndex, item.itemName)}>
+                        <li key={item.itemId} 
+                            onClick={() => handleItemClick(currentBodyPart.idNo, itemIndex, item.itemName)}>
 
-                        <figure className={`item ${item.bool ? 'selected' : ''}`}>
-                            <img src={Images[item.itemName]} alt={item.itemName} />
-                            <span className={`paintBtn ${item.bool && item.itemName !== 'nothing' ? '' : 'hidden'}`}
-                                onClick={(event) => handlePaintClick(event)}>
-                            </span>
-                        </figure>
+                            <figure className={`item ${item.bool ? 'selected' : ''}`}>
+                                <img src={Images[item.itemName]} alt={item.itemName} />
+                                <span className={`paint-icon ${item.bool && item.itemName !== 'nothing' ? '' : 'hidden'}`}
+                                    onClick={(event) => handlePaintClick(event)}>
+                                </span>
+                            </figure>
 
-                        <div className={`paletteContainer ${paletteVisible && item.bool ? '' : 'semiHidden'}`}>
-                            <h4>{`Colors ${item.itemName}`}</h4>
-                            <div className="colorPalette">
-                                {item.colors.map((color, colorIndex) => (
-                                    <span 
-                                        key={colorIndex} 
-                                        className="color" 
-                                        style={{ backgroundColor: color, cursor: color === undefined ? 'auto' : 'pointer' }}
-                                        onClick={() => handleColorClick(color, item.itemName)}
-                                    >   
-                                    </span>
-                                ))}
+                            <div className={`paletteContainer ${paletteVisible && item.bool ? '' : 'hidden'}`}
+                                style={{ opacity: item.itemName === 'nothing' ? '0' : '1'}}>
+                                <div className="colorPalette">
+                                    {item.colors.map((color, colorIndex) => (
+                                        <span 
+                                            key={colorIndex} 
+                                            className="color" 
+                                            style={{ backgroundColor: color, cursor: color === undefined ? 'auto' : 'pointer' }}
+                                            onClick={() => handleColorClick(color, item.itemName)}
+                                        >   
+                                        </span>
+                                    ))}
+                                </div>
                             </div>
-                        </div>
 
-                    </div>
-                ))}
-                    </li>
+                        </li>
+                    ))}
+                    </React.Fragment>
                 ))}
             </ul>
         </>
