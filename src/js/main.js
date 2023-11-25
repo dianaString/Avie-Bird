@@ -2,7 +2,7 @@
 
 // VARIABLES
 const figureItems = document.querySelectorAll(".figureItem");
-const svgs = document.querySelectorAll(".svg");
+//const svgs = document.querySelectorAll(".svg");
 const paintBtns = document.querySelectorAll(".paintBtn");
 const paletteContainers = document.querySelectorAll(".paletteContainer");
 const colorPalettes = document.querySelectorAll(".paletteContainer");

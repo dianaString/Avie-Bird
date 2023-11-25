@@ -1,15 +1,8 @@
-# Avie-Bird-Prototype
+# React + Vite
 
-This is a HTML, CSS and JavaScript prototype of my personal project Avie Bird, it was made to study the main functionality of the web: **customize a lovebird.**
+This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
-### [Take a look at the prototype](https://github.com/dianaString/Avie-Bird-Prototype/settings/pages) 
+Currently, two official plugins are available:
 
-### [Go to the full project]
-  
-<br>
-
----
-
-**Contact:**
-- [LinkedIn](https://es.linkedin.com/in/dianammarmol)
-- [Email](mailto:dianammarmolus@gmail.com)
+- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
+- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
