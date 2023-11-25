@@ -19,7 +19,7 @@ html {
     gap: 3rem;
 
     margin-top: 5.5rem;
-    margin-left: -15rem;
+    /* margin-left: -15rem; */
     font-size: 1.6rem;
 }
 
@@ -54,9 +54,9 @@ li {
 .container_HeadBody{
     display: flex;
     gap: 1rem;
-    /* margin-bottom: 2rem; */
+    margin-top: 2rem;
+    list-style-type: square;
 }
-
 
 .figureItem {
     margin: 1rem;
@@ -85,7 +85,7 @@ li {
     position: absolute;
     /* left: -2px;
     top: -2px; */
-    z-index: -1;
+    /* z-index: -1; */
 }
 
 .colorPalette{
@@ -105,111 +105,96 @@ li {
     border-radius: 5px;
 }
 
-
-.jenaroSVG {
-    transform: scale(1.5);
-    margin: 6rem;
+.container-bichito {
+    margin-top: 3rem;
     position: relative;
-}
+  }
 
-.ancla{
-    width: 260px;
-    height: 330px;
-    background-color: rgba(126, 141, 151, 0);
-    border: 2px solid #24273f;
-    margin-top: -.5rem;
-    display: block;
-    position: relative;
-}
+/* .svg {
+  transform: scale(1.5);
+} */
 
-.bodyBase .svg {
+.bodyBase {
     color: #959d63;
     top: 0px;
     left: 30px;
     position: absolute;
 }
-.headShape .svg {
+.headShapeA {
     color: #f9ece2;
     top: 0px;
     left: 30px;
     position: absolute;
 }
-#headShapeB {
+.headShapeB {
     color: #4d4546;
+    top: 0px;
+    left: 30px;
+    position: absolute;
 }
-.fringe .svg {
+.fringeA {
     color: #f77f37;
     top: 0px;
     left: 37px;
     position: absolute;
 }
-#fringeB {
+.fringeB {
     color: #de402b;
     top: 84px;
     left: 29.8px;
     position: absolute;
 }
-.eye .svg {
+.eyeA {
     color: #0f0000;
     top: 30px;
     left: 97px;
     position: absolute;
     z-index: 1;
 }
-#eyeB {
+.eyeB {
     color: #0f0000;
     top: 34px;
     left: 99px;
     position: absolute;
     z-index: 1;
 }
-.beak .svg {
+.beak {
     color: #f4a570;
     top: 39px;
     left: 40px;
     position: absolute;
 }
-.tummy .svg {
-    color: #f7bc38;
+.tummy {
+    color: #ffdab24f;
     top: 0px;
-    left: 29.5px;
+    left: 30px;
     position: absolute;
 }
-div[data-id="none"] .paintBtn {
-    display: none;
-}
-.none .svg {
-    color: transparent;
-    top: 0px;
-    left: 0px;
-    position: absolute;
-}
-
-.wings .svg {
+.wings {
     color: #787f4d;
     top: 118px;
     left: 30.8px;
     position: absolute;
 }
-.tail .svg {
+.tail {
     color: #4b7465;
     top: 218px;
     left: 178px;
     position: absolute;
 }
-.feet .svg {
+.feet {
     color: #c98f98;
     top: 254px;
     left: 67px;
     position: absolute;
 }
-.doNotTouch #eyeBorder {
+ .eyeBorder {
     color: #fffefe;
     top: 24px;
     left: 91.5px;
     position: absolute;
 }
-.doNotTouch #nose {
+.nose {
     color: #fffefe;
     top: 32.2px;
     left: 42px;

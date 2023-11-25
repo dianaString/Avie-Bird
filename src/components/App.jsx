@@ -1,115 +1,149 @@
-// import reactLogo from '../images/react.svg'
-// import ls from "../services/localStorage";
-// import { useState } from "react";
-import '../styles/style.css'
-import lovebird from '../svg/lovebird.svg'
-//import images from '../images/imageData/imageData'
 
-import Parts from './Parts';
+import React, { useState } from 'react'
+import { Routes, Route, Link, Navigate } from 'react-router-dom'
+import Items from "./Items";
+import ItemDetail from "./ItemDetail";
+// images/data:
+import lovebirdsData from '../data/LovebirdsData.json';
+import lovebird from '../images/lovebird.svg'
+
 
 function App() {
-	/* const [part, setPart] = useState("Head"); */
 
-	//html
+	const [bodyParts, setBodyParts] = useState(lovebirdsData);
+	const [paletteVisible, setPaletteVisible] = useState(false);
+
+	const unsorted = [8,7,4,6,5,0,1,2,3];
+	const unsortedBodyParts = unsorted.map((i) => bodyParts[i]);
+
+	const handleItemClick = (bodyIndex, indexClicked, itemName) => {
+
+		const newBichitoData = bodyParts.map((bodyPart, index) => {
+			if (bodyIndex === index) {
+
+				const items = bodyPart.items.map((item, itemIndex) => {
+					if (indexClicked === itemIndex) {
+						return item.bool ? item : { ...item, bool: true };
+					} else {
+						return item.bool ? { ...item, bool: false } : item;
+					}
+				});
+
+				return { ...bodyPart, items, };
+
+			} else {
+				return bodyPart;
+			}
+		});
+
+		setBodyParts(newBichitoData);
+		console.log("This is the item selected:");
+		console.log(indexClicked, itemName);
+	};
+
+
+	const handlePaintClick = (event) => {
+		event.stopPropagation();
+		setPaletteVisible(!paletteVisible);
+	};
+
+	const handleColorClick = (newColor, itemName) => {
+
+		const newColorBichitoData = bodyParts.map((bodyPart) => {
+			const items = bodyPart.items.map((item) => {
+				if (item.itemName === itemName) {
+					console.log("Este es el itemName");
+					console.log(item.itemName);
+					item.selectedColor = newColor;
+
+				} else {
+					return item;
+				}
+			});
+			return { ...bodyPart, items, };
+		});
+
+		setBodyParts(newColorBichitoData);
+
+		console.log('newColor:');
+		console.log(newColor);
+	}
+
 	return (
 		<>
 			<div className="body">
 				<div>
 					<h1>Avie Bird</h1>
 					<h3>Make your lovebird!</h3>
-					<ul className="container_HeadBody">
-						<Parts title="Head" />
-						<Parts title="Body" />
-						<Parts title="Ready!" />
-					</ul>
-					<div>
-						{/* MIRA EL EJEMPLO DEL AHORCADO!! */}
-						<div className="item-container">
-							{/* Aquí van los items */}
-						</div>
-					</div>
+					<nav> {/* --- MENÚ / NAV --- */}
+						<ul className="container_HeadBody" >
+							<li><Link to="/head">Head</Link></li>
+							<li><Link to="/body">Body</Link></li>
+							<li><Link to="/ready">Ready!</Link></li>
+						</ul>
+					</nav>
+
+					<Routes> {/* --- RUTAS --- */}
+						{bodyParts.map((bodyPart) => (
+							<React.Fragment key={bodyPart.idNo}>
+
+								<Route path="/" element={ 
+										<Navigate 
+											to={`/${bodyParts[0].category}/${bodyParts[0].name}`} 
+											replace />
+										} 
+									index 
+								/>
+								<Route path={`${bodyPart.category}`} 
+									element={
+										<Items 
+											bodyParts={bodyParts}
+										/>
+									}
+								> 
+								<Route index element={<Navigate to={`${bodyPart.name}`} replace />} />
+									{bodyPart.items.map((item) => (
+										<Route 
+											key={item.itemId}
+											path={`:${item.name}`}
+											element={
+												<ItemDetail 
+													bodyParts={bodyParts}
+													handleItemClick={handleItemClick}
+													handlePaintClick={handlePaintClick}
+													paletteVisible={paletteVisible}
+													handleColorClick={handleColorClick} 
+												/>
+											} 
+										/>
+									))}
+								</Route>
+							</React.Fragment>
+						))}
+						<Route key={'Ready'} path={'/Ready'} element={ <h3>Take a photo!</h3>}/>
+					</Routes>
 				</div>
 
-				<div className="jenaroSVG">
-					<span className="ancla"></span>
-					{/* feet */}
-					<div className="feet">
-						<svg className="svg" data-id="feet" id="feet" width="146" height="65">
-							<use xlinkHref={`${lovebird}#feet`}></use>
-						</svg>
-					</div>
-					{/* tail */}
-					<div className="tail">
-						<svg className="svg" data-id="tail" id="tail" width="56" height="59">
-							<use xlinkHref={`${lovebird}#tail`}></use>
-						</svg>
-					</div>
-					{/*  bodyBase */}
-					<div className="bodyBase">
-						<svg className="svg" data-id="bodyBase" id="bodyBase" width="188" height="269">
-							<use xlinkHref={`${lovebird}#bodyBase`}></use>
-						</svg>
-					</div>
-					{/* wings */}
-					<div className="wings">
-						<svg className="svg" data-id="wings" id="wings" width="205" height="126">
-							<use xlinkHref={`${lovebird}#wings`}></use>
-						</svg>
-					</div>
-					{/* tummy */}
-					<div className="tummy">
-						<svg className="svg " data-id="tummy" id="tummy" width="165" height="226">
-							<use xlinkHref={`${lovebird}#tummy`}></use>
-						</svg>
-					</div>
-					{/* none */}
-					<div className="none">
-						<svg className="svg " data-id="none" id="none">
-							<use xlinkHref="#none"></use>
-						</svg>
-					</div>
-					{/* headShape */}
-					<div className="headShape">
-						<svg className="svg" data-id="headShapeA" id="headShapeA" width="129" height="155">
-							<use xlinkHref={`${lovebird}#headShapeA`}></use>
-						</svg>
-						<svg className="svg hidden" data-id="headShapeB" id="headShapeB" width="153" height="155">
-							<use xlinkHref={`${lovebird}#headShapeB`}></use>
-						</svg>
-					</div>
-					{/* fringe */}
-					<div className="fringe">
-						<svg className="svg" data-id="fringeA" id="fringeA" width="122" height="61">
-							<use xlinkHref={`${lovebird}#fringeA`}></use>
-						</svg>
-						<svg className="svg hidden" data-id="fringeB" id="fringeB" width="153" height="78">
-							<use xlinkHref={`${lovebird}#fringeB`}></use>
-						</svg>
-					</div>
-					{/* eye  */}
-					<div className="eye">
-						<svg className="svg" data-id="eyeA" id="eyeA" width="26" height="32">
-							<use xlinkHref={`${lovebird}#eyeA`}></use>
-						</svg>
-						<svg className="svg hidden" data-id="eyeB" id="eyeB" width="25" height="24">
-							<use xlinkHref={`${lovebird}#eyeB`}></use>
-						</svg>
-					</div>
-					{/* beak  */}
-					<div className="beak">
-						<svg className="svg" data-id="beak" id="beak" width="47" height="53">
-							<use xlinkHref={`${lovebird}#beak`}></use>
-						</svg>
-					</div>
-					{/* do not touch */}
-					<div className="doNotTouch">
-						<svg className="svg" data-id="eyeBorder" id="eyeBorder" width="38" height="46">
-							<use xlinkHref={`${lovebird}#eyeBorder`}></use>
-						</svg>
-						<svg className="svg" data-id="nose" id="nose" width="45" height="30">
-							<use xlinkHref={`${lovebird}#nose`}></use>
-						</svg>
-					</div>
+				{/* <JenaroSVG /> */}
+				<div className="container-bichito">
+
+					{unsortedBodyParts.map((bodyPart) => (
+						bodyPart.items.map((item) => (
+							<React.Fragment key={item.itemId}>
+								<svg className={`svg ${item.bool ? '' : 'hidden'} ${item.itemName}`} style={{ color: item.selectedColor }} width={item.width} height={item.height}>
+									<use xlinkHref={`${lovebird}#${item.itemName}`}></use>
+								</svg>
+							</React.Fragment>
+						))
+					))}
+
+					<svg className="svg nose" width="45" height="30">
+						<use xlinkHref={`${lovebird}#nose`}></use>
+					</svg>
+					<svg className="svg eyeBorder" width="38" height="46">
+						<use xlinkHref={`${lovebird}#eyeBorder`}></use>
+					</svg>
+
 				</div>
 			</div>
 		</>
