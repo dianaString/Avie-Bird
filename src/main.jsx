@@ -5,9 +5,10 @@ import App from './components/App'
 import './styles/style.scss'
 import { BrowserRouter } from 'react-router-dom';
 
+const basePath = window.location.pathname.replace(/\/$/, '');
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <BrowserRouter>
+    <BrowserRouter basename={basePath}>
       <App/>
    </BrowserRouter>
   </React.StrictMode>,

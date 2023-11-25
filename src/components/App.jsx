@@ -19,6 +19,7 @@ function App() {
 	const unsorted = [8, 7, 4, 6, 5, 0, 1, 2, 3];
 	const unsortedBodyParts = unsorted.map((i) => bodyParts[i]);
 
+	// eslint-disable-next-line no-unused-vars
 	const handleItemClick = (bodyIndex, indexClicked, itemName) => {
 		const newLovebirdData = bodyParts.map((bodyPart, index) => {
 			if (bodyIndex === index) {
@@ -37,8 +38,6 @@ function App() {
 		});
 
 		setBodyParts(newLovebirdData);
-		console.log("This is the item selected:");
-		console.log(indexClicked, itemName);
 	};
 
 	const handlePaintClick = (event) => {
@@ -50,8 +49,6 @@ function App() {
 		const newColorLovebirdData = bodyParts.map((bodyPart) => {
 			const items = bodyPart.items.map((item) => {
 				if (item.itemName === itemName) {
-					console.log("Este es el itemName");
-					console.log(item.itemName);
 					item.selectedColor = newColor;
 				} else {
 					return item;
@@ -64,7 +61,6 @@ function App() {
 	};
 
 	const handleCameraClick = () => {
-		console.log('Photo!');
 		setCameraClicked(!CameraClicked);
 	}
 
@@ -94,48 +90,48 @@ function App() {
 					<section className="creator">
 						<nav className="nav">
 							{/* --- MENÚ / NAV --- */}
-							<ImageSlider slides={slides} />
-						</nav>
+						<ImageSlider slides={slides} />
+					</nav>
 
-						<Routes>
-							{/* --- RUTAS --- */}
-							{bodyParts.map((bodyPart) => (
-								<React.Fragment key={bodyPart.idNo}>
-									<Route
-										path="/"
-										element={
-											<Navigate
-												to={`/${bodyParts[0].category}/${bodyParts[0].name}`}
-												replace
-											/>
-										}
-										index
-									/>
-									<Route
-										path={`${bodyPart.category}`}
-										element={<Items bodyParts={bodyParts} />}
-									>
-										<Route
-											index
-											element={<Navigate to={`${bodyPart.name}`} replace />}
+					<Routes>
+						{/* --- RUTAS --- */}
+						{bodyParts.map((bodyPart) => (
+							<React.Fragment key={bodyPart.idNo}>
+								<Route
+									path="/"
+									element={
+										<Navigate
+											to={`/${bodyParts[0].category}/${bodyParts[0].name}`}
+											replace
 										/>
-										{bodyPart.items.map((item) => (
-											<Route
-												key={item.itemId}
-												path={`:${item.name}`}
-												element={
-													<ItemDetail
-														bodyParts={bodyParts}
-														handleItemClick={handleItemClick}
-														handlePaintClick={handlePaintClick}
-														paletteVisible={paletteVisible}
-														handleColorClick={handleColorClick}
-													/>
-												}
-											/>
-										))}
-									</Route>
-								</React.Fragment>
+									}
+									index
+								/>
+								<Route
+									path={`${bodyPart.category}`}
+									element={<Items bodyParts={bodyParts} />}
+								>
+									<Route
+										index
+										element={<Navigate to={`/${bodyPart.category}/${bodyPart.name}`} replace />}
+									/>
+									{bodyPart.items.map((item) => (
+										<Route
+											key={item.itemId}
+											path={`:${item.name}`}
+											element={
+												<ItemDetail
+													bodyParts={bodyParts}
+													handleItemClick={handleItemClick}
+													handlePaintClick={handlePaintClick}
+													paletteVisible={paletteVisible}
+													handleColorClick={handleColorClick}
+												/>
+											}
+										/>
+									))}
+								</Route>
+							</React.Fragment>
 							))}
 							<Route
 								key={"Ready"}
