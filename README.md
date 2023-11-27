@@ -48,7 +48,7 @@ This time I decided to focus on the functionality and left the design for the la
    <summary><b>Moving to React and tiny prototype</b></summary>
     <br>
   
-Next step was moving everything to React and the most difficult part was setting up the routes and links, I used **React Router Dom** and I works perfectly locally, but in production... there's some issues (They're desglosed in the [**version**](#version-10-addittions-issues--version) section), it's not a bug that stops you from enjoying the experience of customizing a bird, but it can be problematic if you want to share the web.
+Next step was moving everything to React and the most difficult part was setting up the routes and links, I used **React Router Dom** and I works perfectly locally, but in production... there's some issues (They're desglosed in the [**version**](#version-10-addittions-issues-) section), it's not a bug that stops you from enjoying the experience of customizing a bird, but it can be problematic if you want to share the web.
 
 For the items section, I had to do a prototype of the prototype, simplificate the project to the minimum to get results faster and know what I was doing. It's **ugly** but really **effective**.
 
